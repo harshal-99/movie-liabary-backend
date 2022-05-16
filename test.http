@@ -1,3 +1,17 @@
+### Patch playlist
+PATCH http://localhost:3001/api/playlist
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhcnNoYWwiLCJpZCI6IjYyN2ZhZWEyNTFkN2ZhMDFiNzQxMDQ1NiIsImlhdCI6MTY1MjY4NDg0OX0.YLqyekrduymJrTxFVnvRE5IIL_RTeYafY-owS9k_IXo
+
+{
+  "playlist": {
+    "id": "6281f8fa629b5f6b0bcfd616",
+    "movies": [
+      "6281f6d17d99ffd6f95a594b"
+    ]
+  }
+}
+
 ### Get a playlist by ID
 
 GET http://localhost:3001/api/playlist/6281f8fa629b5f6b0bcfd616
