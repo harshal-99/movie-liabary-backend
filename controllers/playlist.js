@@ -44,7 +44,6 @@ playlistRouter.post('/', async (request, response, next) => {
 		movie = await movie.save()
 	}
 
-	// console.log(user.id)
 
 	const newPlaylist = new Playlist({
 		private: playlist.private,
@@ -56,6 +55,16 @@ playlistRouter.post('/', async (request, response, next) => {
 	const result = await User.findByIdAndUpdate(user.id, {"$push": {"playlist": savedPlaylist}})
 
 	response.send(savedPlaylist.toJSON())
+})
+
+playlistRouter.patch('/', async (request, response, next) => {
+	const {playlist} = request.body
+	if(!playlist || !playlist.id || !playlist.movies) {
+		return response.sendStatus(400)
+	}
+	await Playlist.findByIdAndUpdate(playlist.id, {$set: {movies: playlist.movies}})
+
+	response.sendStatus(204)
 })
 
 export default playlistRouter
