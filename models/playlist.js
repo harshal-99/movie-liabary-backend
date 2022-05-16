@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const playlistSchema = new mongoose.Schema({
-	imdbID: {
-		type: String,
-		required: true,
-	},
 	private: {
 		type: Boolean,
 		required: true
@@ -12,7 +8,13 @@ const playlistSchema = new mongoose.Schema({
 	creator: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "User"
-	}
+	},
+	movies: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "Movie"
+		}
+	]
 })
 
 playlistSchema.set("toJSON", {
@@ -23,6 +25,6 @@ playlistSchema.set("toJSON", {
 	}
 })
 
-const Playlist = mongoose.model("Playlist")
+const Playlist = mongoose.model("Playlist", playlistSchema)
 
 export default Playlist
