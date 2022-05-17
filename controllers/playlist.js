@@ -7,6 +7,14 @@ import Playlist from "../models/playlist.js";
 
 const playlistRouter = Router()
 
+playlistRouter.get('/', async (request, response, next) => {
+	const token = request.token
+	const decodedToken = jwt.verify(token, SECRET)
+
+	const playlists = await User.findById(decodedToken.id).populate('playlist')
+	return response.json(playlists)
+})
+
 playlistRouter.get('/:id', async (request, response, next) => {
 	const id = request.params.id
 	const token = request.token
@@ -59,7 +67,7 @@ playlistRouter.post('/', async (request, response, next) => {
 
 playlistRouter.patch('/', async (request, response, next) => {
 	const {playlist} = request.body
-	if(!playlist || !playlist.id || !playlist.movies) {
+	if (!playlist || !playlist.id || !playlist.movies) {
 		return response.sendStatus(400)
 	}
 	await Playlist.findByIdAndUpdate(playlist.id, {$set: {movies: playlist.movies}})
