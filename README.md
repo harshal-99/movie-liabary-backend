@@ -10,3 +10,13 @@ Fork this to test the api
  - MONGODB_URI for mongodb
  - OMDB_KEY to access OMDB API
  - PORT to run the server
+
+
+### Using the api
+
+- Open the postman collection and fork it.
+- Create an account
+- Login with your credentials
+- Copy the token 
+- Select Authorization type bearer 
+- Use the token to access API endpoints
