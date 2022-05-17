@@ -1,12 +1,16 @@
 import express from "express"
 import morgan from "morgan"
-import {MONGODB_URI} from "./utils/config.js";
 import mongoose from "mongoose";
+import cors from "cors";
+import bodyParser from "body-parser";
+import "express-async-errors"
+
+import {MONGODB_URI} from "./utils/config.js";
 import usersRouter from "./controllers/users.js";
 import loginRouter from "./controllers/login.js";
-import cors from "cors";
 import {errorHandler, tokenExtractor, tokenValidator} from "./utils/middlewar.js";
 import playlistRouter from "./controllers/playlist.js";
+import searchRouter from "./controllers/search.js";
 
 const app = express()
 
@@ -24,6 +28,7 @@ mongoose.connect(MONGODB_URI, {
 	})
 
 app.use(cors())
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 app.use(morgan('dev'))
 
@@ -34,6 +39,7 @@ app.use(tokenExtractor)
 app.use(tokenValidator)
 
 app.use('/api/playlist', playlistRouter)
+app.use('/api/search', searchRouter)
 
 app.use(errorHandler)
 
