@@ -64,7 +64,7 @@ playlistRouter.patch('/', async (request, response, next) => {
 	}
 	await Playlist.findByIdAndUpdate(playlist.id, {$set: {movies: playlist.movies}})
 
-	response.sendStatus(204)
+	response.json({id: playlist.id})
 })
 
 export default playlistRouter
