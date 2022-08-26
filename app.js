@@ -32,6 +32,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(express.json())
 app.use(morgan('dev'))
 
+app.get('/', (req, res) => {
+	res.redirect('https://github.com/harshal-99/movie-liabary-backend')
+})
+
 app.use('/api/signup', usersRouter)
 app.use('/api/login', loginRouter)
 
